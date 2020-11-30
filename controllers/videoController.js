@@ -1,5 +1,4 @@
 // controller : 어떤 일이 어떻게 발생하는지에 관한 로직
-import { videos } from "../db";
 import routes from "../routes";
 
 export const home = (req, res) => {
