@@ -16,7 +16,7 @@ const app = express();
 
 
 // middleware 자리
-app.use(helmet());
+app.use( helmet({ contentSecurityPolicy: false }));
 app.set("view engine", "pug");
 app.use(cookieParser());
 app.use(bodyParser.json());
