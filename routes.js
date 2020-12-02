@@ -1,5 +1,7 @@
 // URL 작성! 어디에서든 이 URL을 불러다 쓸 수있게
 
+import { deleteVideo } from "./controllers/videoController";
+
 // Global
 const HOME = "/";
 const JOIN = "/join";
@@ -45,8 +47,20 @@ const routes = {
         return VIDEO_DETAIL;
       }
     },
-    editVideo: EDIT_VIDEO,
-    deleteVideo: DELETE_VIDEO
+    editVideo: (id) => {
+      if(id) {
+        return `/videos/${id}/edit`;
+      } else {
+        return EDIT_VIDEO;
+      }
+    },
+    deleteVideo: (id) => {
+      if(id) {
+        return `/videos/${id}/delete`;
+      } else {
+        return DELETE_VIDEO;
+      }
+    }
 };
  
 export default routes;
