@@ -23,6 +23,9 @@ export const search = async (req, res) => {
   let videos = [];
   try {
     videos = await Video.find({
+      // $option: "i" -> 대소문자 구분 x
+      // $regex: searchingBy -> find로 찾지 말고 regex를 사용하여
+      // searchingBy를 찾아라!
       title: { $regex: searchingBy, $options: "i" },
     });
   } catch (error) {
@@ -31,6 +34,7 @@ export const search = async (req, res) => {
   // const searchingBy = req.query.term;
   // 위에꺼와  const searchingBy = req.query.term 과 같은 뜻
   res.render("search", { pageTitle: "Search", searchingBy, videos });
+  console.log(videos);
 };
 
 // Upload
@@ -91,6 +95,7 @@ export const postEditVideo = async (req, res) => {
     body: { title, description },
   } = req;
   try {
+    // _id : 우리가 고유한 ID를 가지고 있는지 확인하기 위해 자동으로 생성된다.
     await Video.findOneAndUpdate({ _id: id }, { title, description });
     res.redirect(routes.videoDetail(id));
   } catch (error) {

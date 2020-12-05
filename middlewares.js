@@ -6,13 +6,14 @@ import routes from "./routes";
 const multerVideo = multer({ dest: "uploads/videos/" });
 
 export const localsMiddleware = (req, res, next) => {
-    res.locals.siteName = "WeTube";
-    res.locals.routes = routes;
-    res.locals.user = {
-        isAuthenticated: true,
-        id: 1
-    };
-    next();
+  res.locals.siteName = "WeTube";
+  res.locals.routes = routes;
+  res.locals.user = {
+    isAuthenticated: true,
+    id: 1,
+  };
+  next();
 };
 
+// "videoFile" 은 upload.pug의 file의 name 값
 export const uploadVideo = multerVideo.single("videoFile");
