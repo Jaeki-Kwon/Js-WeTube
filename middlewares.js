@@ -3,6 +3,7 @@
 import multer from "multer";
 import routes from "./routes";
 
+// file을 Upload하고 URL을 반환하는 middleware
 const multerVideo = multer({ dest: "uploads/videos/" });
 
 export const localsMiddleware = (req, res, next) => {
