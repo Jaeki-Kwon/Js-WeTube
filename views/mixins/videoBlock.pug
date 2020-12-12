@@ -3,8 +3,11 @@
     즉, 웹사이트에서 자주 반복되는 html코드를 담음//
 
 mixin videoBlock(video = {})
-    .videoBolock
+    .videoBlock
         a(href=routes.videoDetail(video.id))
-            video.videoBlock__thumbnail(src=video.videoFile, controls=true)
+            video.videoBlock__thumbnail(src=video.videoFile, controls=false)
             h4.videoBlock__title=video.title
-            h6.videoBlock__views=video.views
+            if video.views === 1
+                h6.videoBlock__views 1 view
+            else
+                h6.videoBlock__views #{video.views} views 

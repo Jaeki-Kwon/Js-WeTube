@@ -15,10 +15,12 @@ export const postJoin = async (req, res, next) => {
     res.render("join", { pageTitle: "Join" });
   } else {
     try {
+      // 계정(사용자) 생성
       const user = await User({
         name,
         email,
       });
+      // 계정 등록
       await User.register(user, password);
       next();
     } catch (error) {
@@ -32,6 +34,7 @@ export const getLogin = (req, res) => {
   res.render("login", { pageTitle: "Log In" });
 };
 
+// local은 우리가 설치해준 Strategy의 이름
 export const postLogin = passport.authenticate("local", {
   failureRedirect: routes.login,
   successRedirect: routes.home,
@@ -40,9 +43,11 @@ export const postLogin = passport.authenticate("local", {
 export const githubLogin = passport.authenticate("github");
 
 export const githubLoginCallback = async (_, __, profile, cb) => {
+  // console.log(accessToken, refreshToken, profile, cb);
   const {
-    _json: { id, avatar_url, name, email },
+    _json: { id, avatar_url: avatarUrl, name, email },
   } = profile;
+  console.log(profile);
   try {
     const user = await User.findOne({ email });
     if (user) {
@@ -54,8 +59,9 @@ export const githubLoginCallback = async (_, __, profile, cb) => {
       email,
       name,
       githubId: id,
-      avatarUrl: avatar_url,
+      avatarUrl,
     });
+    console.log(newUser);
     return cb(null, newUser);
   } catch (error) {
     return cb(error);
@@ -72,8 +78,23 @@ export const logout = (req, res) => {
   res.redirect(routes.home);
 };
 
-export const userDetail = (req, res) =>
-  res.render("userDetail", { pageTitle: "User Detail" });
+// 현재 로그인 된 유저
+export const getMe = (req, res) => {
+  console.log(req.user);
+  res.render("userDetail", { pageTitle: "User Detail", user: req.user });
+};
+
+export const userDetail = async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+  try {
+    const user = await User.findById(id);
+    res.render("userDetail", { pageTitle: "User Detail", user });
+  } catch (error) {
+    res.redirect(routes.home);
+  }
+};
 
 export const editProfile = (req, res) =>
   res.render("editProfile", { pageTitle: "Edit Profile" });
