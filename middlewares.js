@@ -5,6 +5,7 @@ import routes from "./routes";
 
 // file을 Upload하고 URL을 반환하는 middleware
 const multerVideo = multer({ dest: "uploads/videos/" });
+const multerAvatar = multer({ dest: "uploads/avatars/" });
 
 export const localsMiddleware = (req, res, next) => {
   res.locals.siteName = "WeTube";
@@ -31,3 +32,4 @@ export const onlyPrivate = (req, res, next) => {
 
 // "videoFile" 은 upload.pug의 file의 name 값
 export const uploadVideo = multerVideo.single("videoFile");
+export const uploadAvatar = multerAvatar.single("avatar");

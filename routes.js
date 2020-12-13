@@ -1,5 +1,8 @@
 // URL 작성! 어디에서든 이 URL을 불러다 쓸 수있게
 
+// video 작성자 프로필 화면으로 갈 때 프로필 사진 엑박 방지용
+const BASE = "http://localhost:4000/";
+
 // Global
 const HOME = "/";
 const JOIN = "/join";
@@ -26,6 +29,7 @@ const GITHUB = "/auth/github";
 const GITHUB_CALLBACK = "/auth/github/callback";
 
 const routes = {
+  base: BASE,
   home: HOME,
   join: JOIN,
   login: LOGIN,
