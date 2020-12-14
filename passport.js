@@ -1,7 +1,7 @@
 import passport from "passport";
 import GithubStrategy from "passport-github";
-import { githubLoginCallback } from "./controllers/userController";
 import User from "./models/User";
+import { githubLoginCallback } from "./controllers/userController";
 import routes from "./routes";
 
 // Strategy : 로그인 하는 방식
