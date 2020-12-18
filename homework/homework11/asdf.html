@@ -1,0 +1,60 @@
+<html>
+  <body>
+    <h1>Voice Record Demo</h1>
+
+    <p>Record a short voice memo and play it back.</p>
+
+    <p>
+      <button>Start recording</button>
+    </p>
+
+    <p>
+      <audio controls></audio>
+    </p>
+
+    <script>
+      var blob;
+
+      var handleSuccess = function (stream) {
+        console.log("getUserMedia succeeded");
+
+        var button = document.querySelector("button");
+        var clicked = false;
+        var chunks = [];
+
+        var audioContext = new AudioContext();
+        var mediaRecorder = new MediaRecorder(stream);
+
+        button.addEventListener("click", function (element) {
+          if (!clicked) {
+            mediaRecorder.start();
+            element.target.innerHTML = "Stop recording";
+            clicked = true;
+          } else {
+            mediaRecorder.stop();
+            element.target.disabled = true;
+          }
+        });
+
+        mediaRecorder.ondataavailable = function (evt) {
+          // push each chunk (blobs) in an array
+          console.log("pushing blob");
+          chunks.push(evt.data);
+        };
+
+        mediaRecorder.onstop = function (evt) {
+          // Make blob out of our blobs, and open it.
+          console.log("mediaRecorder.onstop");
+          blob = new Blob(chunks, { type: "audio/ogg; codecs=opus" });
+          console.log("starting set audio source");
+          document.querySelector("audio").src = URL.createObjectURL(blob);
+          console.log("finished set audio source");
+        };
+      };
+
+      navigator.mediaDevices
+        .getUserMedia({ audio: true, video: false })
+        .then(handleSuccess);
+    </script>
+  </body>
+</html>
