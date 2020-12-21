@@ -4,6 +4,8 @@ const apiCity = document.getElementById("apiCity");
 
 const API_URL = "http://ip-api.com/json/";
 
+apiText.innerHTML = "Locating you.....";
+
 const register = () => {
   fetch(API_URL)
     .then((res) => {
