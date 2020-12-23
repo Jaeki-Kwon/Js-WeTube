@@ -1,7 +1,7 @@
 // URL 작성! 어디에서든 이 URL을 불러다 쓸 수있게
 
 // video 작성자 프로필 화면으로 갈 때 프로필 사진 엑박 방지용
-const BASE = "http://localhost:4000/";
+// const BASE = "http://localhost:4000/";
 
 // Global
 const HOME = "/";
@@ -32,9 +32,10 @@ const GITHUB_CALLBACK = "/auth/github/callback";
 const API = "/api";
 const REGISTER_VIEW = "/:id/view";
 const ADD_COMMENT = "/:id/comment";
+const DELETE_COMMENT = "/:id/delete";
 
 const routes = {
-  base: BASE,
+  // base: BASE,
   home: HOME,
   join: JOIN,
   login: LOGIN,
@@ -79,6 +80,7 @@ const routes = {
   api: API,
   registerView: REGISTER_VIEW,
   addComment: ADD_COMMENT,
+  deleteComment: DELETE_COMMENT,
 };
 
 export default routes;

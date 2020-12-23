@@ -1,5 +1,5 @@
 // application을 호출 하기 위하여 사용
-
+import "@babel/polyfill";
 import "./db";
 import dotenv from "dotenv";
 import app from "./app";
