@@ -5,10 +5,13 @@ import dotenv from "dotenv";
 // .env 파일 안에 있는 정보를 불러올 수 있음
 dotenv.config();
 
-mongoose.connect(process.env.MONGO_URL_PROD, {
-  useNewUrlParser: true,
-  useFindAndModify: false,
-});
+mongoose.connect(
+  process.env.PRODUCTION ? process.env.MONGO_URL_PROD : process.env.MONGO_URL,
+  {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+  }
+);
 
 const db = mongoose.connection;
 
