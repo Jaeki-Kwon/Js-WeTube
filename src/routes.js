@@ -32,7 +32,7 @@ const GITHUB_CALLBACK = "/auth/github/callback";
 const API = "/api";
 const REGISTER_VIEW = "/:id/view";
 const ADD_COMMENT = "/:id/comment";
-const DELETE_COMMENT = "/:id/delete";
+const DELETE_COMMENT = "/:videoId/:commentId/delete";
 
 const routes = {
   // base: BASE,
